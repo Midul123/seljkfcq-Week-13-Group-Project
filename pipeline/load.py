@@ -1,6 +1,6 @@
 """Script to load data to microsoft sql server"""
-from dotenv import load_dotenv
 from os import environ as ENV
+from dotenv import load_dotenv
 import pyodbc
 
 
