@@ -3,6 +3,7 @@ __pycache__
 .pytest_cache
 .ipynb_checkpoints
 .venv
+*.csv
 .env
 *.json
 .terraform*

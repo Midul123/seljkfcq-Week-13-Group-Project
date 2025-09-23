@@ -38,8 +38,8 @@ def round_floats_2dp(df):
 
 if __name__ == "__main__":
     plants_df = pd.read_json("plants.json")
-    df = add_columns(plants_df)
-    df = change_type_to_date(plants_df)
-    df = drop_columns(plants_df)
-    df = round_floats_2dp(df)
-    df.to_csv("cleaned_plants_data.csv", index=False)
+    cleaned_df = add_columns(plants_df)
+    cleaned_df = change_type_to_date(cleaned_df)
+    cleaned_df = drop_columns(cleaned_df)
+    cleaned_df = round_floats_2dp(cleaned_df)
+    cleaned_df.to_csv("cleaned_plants_data.csv", index=False)

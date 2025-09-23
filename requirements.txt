@@ -1,2 +1,8 @@
 pylint
 pytest
+requests
+ipykernel
+pandas
+python-dotenv
+pyodbc
+
