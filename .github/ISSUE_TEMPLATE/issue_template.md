@@ -18,4 +18,5 @@ What is the purpose of the issue
 
 # Time Estimation
 Time: S / M / L
+
 Priority: P0 / P1 / P2
