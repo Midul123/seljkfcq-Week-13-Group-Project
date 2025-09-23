@@ -1,0 +1,48 @@
+name: Pytest and pylint
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '**.py'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.py'
+
+jobs:
+  run_tests:
+      runs-on: ubuntu-latest
+  
+      steps:
+      - name: Checkout repository (clone repo into virtual machine)
+        uses: actions/checkout@v3
+        
+      - name: Install python to the virtual machine
+        uses: actions/setup-python@v4.6.0
+        
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+        
+      - name: Run tests
+        run: pytest
+
+  linting:
+      runs-on: ubuntu-latest
+  
+      steps:
+      - name: Checkout repository (clone repo into virtual machine)
+        uses: actions/checkout@v3
+        
+      - name: Install python to the virtual machine
+        uses: actions/setup-python@v4.6.0
+        
+      - name: Move into zoo directory
+        run: cd langdale_zoo_api
+        
+      - name: Install our requirements
+        run: pip install -r requirements.txt
+        
+      - name: Run pylint
+        run: pylint --fail-under=8 **.py
