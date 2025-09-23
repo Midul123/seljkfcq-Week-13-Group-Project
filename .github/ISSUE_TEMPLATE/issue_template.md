@@ -2,7 +2,7 @@
 name: issue_template
 about: Issue Template
 title: ''
-labels: ''
+labels: 'template'
 assignees: ''
 
 ---
@@ -11,11 +11,11 @@ assignees: ''
 What is the purpose of the issue
 
 # Outcome
-What do you want the issue to do
-[ ]
+- [ ] What do you want the issue to do?
 
-# Associated User stories
-Enter your user story here
+# Associated User Stories
+- As a (user), I want to be able to (do something), so that I can (reason).
 
-# Time estimation
-How long will this take and how much effort
+# Time Estimation
+Time: S / M / L
+Priority: P0 / P1 / P2
