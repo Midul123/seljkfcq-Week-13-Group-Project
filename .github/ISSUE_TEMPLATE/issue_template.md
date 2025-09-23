@@ -14,7 +14,7 @@ What is the purpose of the issue
 - [ ] What do you want the issue to do?
 
 # Associated User Stories
-- As a (user), I want to be able to (do something), so that I can (reason).
+As a (user), I want to be able to (do something), so that I can (reason).
 
 # Time Estimation
 Time: S / M / L
