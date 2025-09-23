@@ -5,6 +5,7 @@ import pyodbc
 
 
 def get_db_connection() -> pyodbc.Connection:
+    """get db connection"""
     load_dotenv()
     conn_str = (f"DRIVER={{{ENV['DB_DRIVER']}}};SERVER={ENV['DB_HOST']};"
                 f"PORT={ENV['DB_PORT']};DATABASE={ENV['DB_NAME']};"
