@@ -10,7 +10,7 @@ def get_plant_by_id(plant_id):
     return requests.request(url=url, method='GET', timeout=5)
 
 
-def loop_plants_api(max_attempts: int = 1000, max_404_in_row: int = 5):
+def loop_plants_api(max_attempts: int = 100, max_404_in_row: int = 5):
     """Gets the plant data and appends it to a list, loops stops after n 404s"""
     count = 0
     plants = []
