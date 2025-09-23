@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS plant (
 -- Plant Reading table
 CREATE TABLE IF NOT EXISTS plant_reading (
     reading_id SERIAL PRIMARY KEY,
-    plant_id_name INTEGER NOT NULL REFERENCES plant(plant_id),
+    plant_id INTEGER NOT NULL REFERENCES plant(plant_id),
     botanist_id INTEGER NOT NULL REFERENCES botanist(botanist_id),
     temperature INTEGER NOT NULL,
     last_watered TIMESTAMPTZ NOT NULL,
