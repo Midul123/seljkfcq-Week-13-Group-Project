@@ -38,9 +38,6 @@ jobs:
       - name: Install python to the virtual machine
         uses: actions/setup-python@v4.6.0
         
-      - name: Move into zoo directory
-        run: cd langdale_zoo_api
-        
       - name: Install our requirements
         run: pip install -r requirements.txt
         
