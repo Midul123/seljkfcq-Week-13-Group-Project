@@ -1,3 +1,5 @@
 requests
 ipykernel
 pandas
+pylint
+pytest
