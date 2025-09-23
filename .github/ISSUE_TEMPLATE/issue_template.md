@@ -17,6 +17,6 @@ What is the purpose of the issue
 As a (user), I want to be able to (do something), so that I can (reason).
 
 # Time Estimation
-Time: S / M / L
+Size: S / M / L
 
 Priority: P0 / P1 / P2
