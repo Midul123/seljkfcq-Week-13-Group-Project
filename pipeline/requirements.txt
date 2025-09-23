@@ -3,3 +3,5 @@ ipykernel
 pandas
 python-dotenv
 pyodbc
+pylint
+pytest
