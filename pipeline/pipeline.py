@@ -31,6 +31,7 @@ def handler(event=None, context=None) -> None:
     upload_to_botanist_table(con, all_data)
     upload_to_plant_table(con, all_data)
     upload_to_plant_readings_table(con, all_data)
+    return 'done'
 
 
 if __name__ == "__main__":
