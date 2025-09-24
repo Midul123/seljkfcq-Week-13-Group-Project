@@ -4,7 +4,6 @@ import os
 import logging
 import pyodbc
 
-from dotenv import load_dotenv
 import pandas as pd
 
 from utils import setup_logging, get_db_connection
@@ -17,21 +16,21 @@ def setup_folders(base: str = BASE_FOLDER) -> None:
 
     if not os.path.exists(base):
         os.mkdir(base)
-        logging.info("Created base filepath.")
+        logging.info("Created base filepath")
 
     if not os.path.exists(f"{base}/output"):
         os.mkdir(f"{base}/output")
-        logging.info("Created output folder.")
+        logging.info("Created output folder")
 
     if not os.path.exists(f"{base}/input"):
         os.mkdir(f"{base}/input")
-        logging.info("Created input folder.")
+        logging.info("Created input folder")
 
     if not os.path.exists(f"{base}/input/plant_readings"):
         os.mkdir(f"{base}/input/plant_readings")
-        logging.info("Created input/plant_readings folder.")
+        logging.info("Created input/plant_readings folder")
 
-    logging.info("Parquet files folder structure set up completed.")
+    logging.info("Parquet files folder structure set up completed")
 
 
 def get_recording_data_df(conn: pyodbc.Connection) -> pd.DataFrame:
@@ -68,30 +67,28 @@ def get_recording_data_df(conn: pyodbc.Connection) -> pd.DataFrame:
 
     result = pd.read_sql(query, conn)
 
-    logging.info("Retrieved all Recording data from database.")
+    logging.info("Retrieved all Recording data from database")
     return result
 
 
-def save_recordings_to_parquet(conn: pyodbc.Connection) -> None:
+def save_recordings_to_parquet() -> None:
     """
     Creates the folder structure and saves recording data into parquet files.
-    Returns dataframe with time partition columns.
     """
 
+    conn = get_db_connection()
     df = get_recording_data_df(conn)
+    conn.close()
+
     setup_folders(BASE_FOLDER)
     df.to_parquet(
         path=f"{BASE_FOLDER}/input/plant_readings",
         partition_cols=['year', 'month', 'day']
     )
 
-    logging.info("Created parquet structure & files.")
+    logging.info("Created parquet structure & files")
 
 
 if __name__ == "__main__":
-
     setup_logging()
-
-    conn = get_db_connection()
-    save_recordings_to_parquet(conn)
-    conn.close()
+    save_recordings_to_parquet()
