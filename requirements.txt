@@ -5,4 +5,5 @@ ipykernel
 pandas
 python-dotenv
 pyodbc
-
+aiohttp
+asyncio

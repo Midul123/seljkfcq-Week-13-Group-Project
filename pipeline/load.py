@@ -1,4 +1,7 @@
 """Script to load data to microsoft sql server"""
+
+# pylint: disable=line-too-long, c-extension-no-member
+
 from os import environ as ENV
 from dotenv import load_dotenv
 import pyodbc
