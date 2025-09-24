@@ -9,7 +9,7 @@ from transform import add_columns, change_type_to_date, drop_columns, round_floa
 from load import get_db_connection, get_all_data, upload_to_botanist_table, upload_to_city_table, upload_to_plant_readings_table, upload_to_plant_table
 
 
-if __name__ == "__main__":
+def handler(event=None, context=None) -> None:
     # Extract
     plant_data = asyncio.run(main())
     plant_data = [x for x in plant_data if x is not None]
@@ -31,3 +31,7 @@ if __name__ == "__main__":
     upload_to_botanist_table(con, all_data)
     upload_to_plant_table(con, all_data)
     upload_to_plant_readings_table(con, all_data)
+
+
+if __name__ == "__main__":
+    handler()
