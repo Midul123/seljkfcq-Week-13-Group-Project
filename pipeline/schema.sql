@@ -20,7 +20,7 @@ CREATE TABLE gamma.botanist(
     botanist_id INT IDENTITY(1,1) PRIMARY KEY,
     botanist_name VARCHAR(100) NOT NULL,
     botanist_email VARCHAR(100) NOT NULL,
-    botanist_phone VARCHAR(20) NOT NULL,
+    botanist_phone VARCHAR(24) NOT NULL,
 );
 
 -- Creates City Table
