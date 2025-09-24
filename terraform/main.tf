@@ -15,3 +15,32 @@ resource "aws_lambda_function" "project-lambda-1" {
 
   architectures = ["x86_64"]
 }
+
+resource "aws_ecr_repository" "project-ecr" {
+  name                 = "c19-seljkfcq-ecr-tf"
+  image_tag_mutability = "MUTABLE"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+resource "aws_ecr_repository" "project-ecr" {
+  name                 = "c19-seljkfcq-ecr-tf"
+  image_tag_mutability = "MUTABLE"
+}
