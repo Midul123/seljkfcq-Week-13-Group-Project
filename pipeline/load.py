@@ -1,4 +1,7 @@
 """Script to load data to microsoft sql server"""
+
+# pylint: disable=line-too-long, c-extension-no-member
+
 from os import environ as ENV
 from dotenv import load_dotenv
 import pyodbc
@@ -19,7 +22,7 @@ def get_db_connection() -> pyodbc.Connection:
 
 def get_all_data() -> pd.DataFrame:
     """Get all data from csv file"""
-    data = pd.read_csv("cleaned_plants_data.csv")
+    data = pd.read_csv("tmp/cleaned_plants_data.csv")
     return data
 
 
