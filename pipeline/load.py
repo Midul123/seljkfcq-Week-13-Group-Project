@@ -87,14 +87,14 @@ def upload_to_plant_table(conn: pyodbc.Connection, df: pd.DataFrame):
             cur.execute(
                 """
                 IF NOT EXISTS (
-                    SELECT 1 FROM plant WHERE plant_name = ? AND lat = ? AND lang = ? AND city_id = ? AND scientific_name = ?
+                    SELECT 1 FROM plant WHERE plant_name = ?
                 )
                 BEGIN
                     INSERT INTO plant (plant_name, lat, lang, city_id, scientific_name) VALUES (?, ?, ?, ?, ?)
                 END
                 """,
-                (row.name, row.lat,
-                 row.long, row.city_id, row.scientific_name, row.name, row.lat, row.long, row.city_id, row.scientific_name)
+                (row.name, row.name, row.lat, row.long,
+                 row.city_id, row.scientific_name)
             )
 
 
@@ -102,14 +102,14 @@ def get_all_plant_id(conn: pyodbc.Connection) -> pd.DataFrame:
     """Get all plant id to map to city names"""
     query = "SELECT plant_id, plant_name FROM plant"
     df_plant = pd.read_sql(query, conn)
-    return df_plant
+    return df_plant.drop_duplicates(subset=["plant_name"])
 
 
 def get_all_botanist_id(conn: pyodbc.Connection) -> pd.DataFrame:
     """Get all botanist id to map to city names"""
     query = "SELECT botanist_name, botanist_id FROM botanist"
     df_botanist = pd.read_sql(query, conn)
-    return df_botanist
+    return df_botanist.drop_duplicates(subset=["botanist_name"])
 
 
 def upload_to_plant_readings_table(conn: pyodbc.Connection, df: pd.DataFrame):
