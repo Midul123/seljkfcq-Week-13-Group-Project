@@ -33,9 +33,9 @@ async def main():
 
 def load_data_to_json(plants_data: list):
     """Makes a folder and adds the plant data to it in json"""
-    if not os.path.isdir('tmp'):
+    if not os.path.exists('tmp/'):
         logging.info("Creating tmp folder")
-        os.mkdir('/tmp')
+        os.mkdir('/tmp/')
     with open('/tmp/plants.json', 'w') as f:
         json.dump(plants_data, f, indent=4)
 
