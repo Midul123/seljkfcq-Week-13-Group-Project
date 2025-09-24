@@ -1,6 +1,5 @@
 """Script to extract plant data from an API endpoint."""
 
-import os
 import logging
 import json
 

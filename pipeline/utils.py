@@ -1,10 +1,9 @@
 import os
 from os import environ as ENV
-import logging
-import pyodbc
-
 from dotenv import load_dotenv
-import pandas as pd
+import logging
+
+import pyodbc
 
 
 def setup_logging() -> None:
