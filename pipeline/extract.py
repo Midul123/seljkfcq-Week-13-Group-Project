@@ -1,4 +1,4 @@
-"""Extracts plant data from an api endpoint"""
+"""Script to extract plant data from an API endpoint."""
 
 import os
 import logging
@@ -55,22 +55,21 @@ def drop_null_plants(plant_data: list) -> list:
     return plant_data
 
 
-def load_data_to_json(plant_data: list) -> None:
+def save_data_as_json(plant_data: list) -> None:
     """Add plant data to temporary folder as a JSON file."""
 
     check_for_tmp_folder()
-    file_path = "/tmp/plants.json"
-    with open(file_path, 'w') as f:
+    with open('/tmp/plants.json', 'w') as f:
         json.dump(plant_data, f, indent=4)
-    logging.info(f"Created JSON file to store plant data: {file_path}")
+    logging.info("Created JSON file to store plant data: /tmp/plants.json")
 
 
 def run_extract() -> None:
-    """Runs the complete Extract script."""
+    """Run extract script."""
 
     plant_data = asyncio.run(async_main())
     plant_data = drop_null_plants(plant_data)
-    load_data_to_json(plant_data)
+    save_data_as_json(plant_data)
     logging.info("Extract script run successfully")
 
 
