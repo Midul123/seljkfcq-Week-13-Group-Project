@@ -2,31 +2,32 @@
 import json
 import logging
 import requests
+import aiohttp
+import asyncio
 
 
-def get_plant_by_id(plant_id):
+async def get_plant_by_id(session, plant_id):
     """Gets plant data by id"""
     url = f"https://sigma-labs-bot.herokuapp.com/api/plants/{plant_id}"
-    return requests.request(url=url, method='GET', timeout=5)
+    async with session.get(url) as response:
+        if response.status == 200:
+            return await response.json()
 
 
-def loop_plants_api(max_attempts: int = 100, max_404_in_row: int = 5):
+async def loop_plants_api(session, max_attempts: int = 70):
     """Gets the plant data and appends it to a list, loops stops after n 404s"""
-    count = 0
     plants = []
     for i in range(max_attempts):
-        req = get_plant_by_id(i)
+        task = asyncio.create_task(get_plant_by_id(session, i))
+        plants.append(task)
+    result = await asyncio.gather(*plants)
+    return result
 
-        if req.status_code == 404:
-            count += 1
-            if count == max_404_in_row:
-                logging.info(
-                    f"{max_404_in_row} consecutive 404s. Stopping at iteration {i}.")
-                break
-        if req.status_code == 200:
-            count = 0
-            plants.append(req.json())
-    return plants
+
+async def main():
+    async with aiohttp.ClientSession() as session:
+        data = await loop_plants_api(session)
+        return data
 
 
 def load_data_to_json(plants_data: list):
@@ -37,5 +38,6 @@ def load_data_to_json(plants_data: list):
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    plant_data = loop_plants_api()
+    plant_data = asyncio.run(main())
+    plant_data = [x for x in plant_data if x is not None]
     load_data_to_json(plant_data)
