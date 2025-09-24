@@ -10,3 +10,4 @@ __pycache__
 terraform.tfvars
 terraform.tfstate
 terraform.tfstate.backup
+c19-m3y-plants/
