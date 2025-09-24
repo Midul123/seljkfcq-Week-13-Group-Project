@@ -69,7 +69,7 @@ def clean_emails(df: pd.DataFrame) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    plants_df = pd.read_json("plants.json")
+    plants_df = pd.read_json("tmp/plants.json")
     cleaned_df = add_columns(plants_df)
     cleaned_df = change_type_to_date(cleaned_df)
     cleaned_df = drop_columns(cleaned_df)
@@ -77,4 +77,4 @@ if __name__ == "__main__":
     cleaned_df = clean_phone_numbers(cleaned_df)
     cleaned_df = remove_brackets_from_scientific_name(cleaned_df)
     cleaned_df = clean_emails(cleaned_df)
-    cleaned_df.to_csv("cleaned_plants_data.csv", index=False)
+    cleaned_df.to_csv("tmp/cleaned_plants_data.csv", index=False)
