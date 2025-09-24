@@ -8,3 +8,4 @@ __pycache__
 *.json
 .terraform*
 terraform.tfvars
+c19-m3y-plants/
