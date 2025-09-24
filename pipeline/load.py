@@ -22,7 +22,7 @@ def get_db_connection() -> pyodbc.Connection:
 
 def get_all_data() -> pd.DataFrame:
     """Get all data from csv file"""
-    data = pd.read_csv("cleaned_plants_data.csv")
+    data = pd.read_csv("tmp/cleaned_plants_data.csv")
     return data
 
 
