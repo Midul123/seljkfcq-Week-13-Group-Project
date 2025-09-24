@@ -1,46 +1,60 @@
-
+# S3 bucket
 resource "aws_s3_bucket" "project-s3" {
-    bucket = "c19-seljkfcq-project"
+  bucket = "c19-seljkfcq-project"
 
-    force_destroy = true
+  force_destroy = true
+}
+
+# ECR repository
+resource "aws_ecr_repository" "project-ecr" {
+  name                 = "c19-seljkfcq-ecr-tf"
+  image_tag_mutability = "MUTABLE"
+}
+
+# Lambda and AWS role
+resource "aws_iam_role" "lambda_exec_role" {
+ name = "seljkfcq-lambda-execution-role"
+  assume_role_policy = jsonencode({
+   Version = "2012-10-17",
+   Statement = [
+     {
+       Action = "sts:AssumeRole",
+       Principal = {
+         Service = "lambda.amazonaws.com"
+       },
+       Effect = "Allow"
+     }
+   ]
+ })
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
+ role       = aws_iam_role.lambda_exec_role.name
+ policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
 resource "aws_lambda_function" "project-lambda-1" {
-  function_name = "c19_seljkfcq-lambda_function-tf"
-  role          = "insert role:arn"
+  function_name = "c19-seljkfcq-lambda-function-tf"
+  role          = aws_iam_role.lambda_exec_role.arn
   package_type  = "Image"
-  image_uri     = "Insert"
+  image_uri     = var.IMAGE_URI
   memory_size = 512
   timeout     = 300
+
+  environment {
+    variables = {
+      KEY_ACCESS = var.AWS_ACCESS_KEY
+      KEY_SECRET = var.AWS_SECRET_KEY
+      DB_HOST=var.DB_HOST
+      DB_PORT=1433
+      DB_USER=var.DB_USER
+      DB_PASSWORD=var.DB_PASSWORD
+      DB_NAME=var.DB_NAME
+      DB_SCHEMA=var.DB_SCHEMA
+      DB_DRIVER=var.DB_DRIVER
+    }
+  }
 
   architectures = ["x86_64"]
 }
 
-resource "aws_ecr_repository" "project-ecr" {
-  name                 = "c19-seljkfcq-ecr-tf"
-  image_tag_mutability = "MUTABLE"
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-resource "aws_ecr_repository" "project-ecr" {
-  name                 = "c19-seljkfcq-ecr-tf"
-  image_tag_mutability = "MUTABLE"
-}
