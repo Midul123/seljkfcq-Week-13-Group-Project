@@ -1,4 +1,7 @@
 '''Get the extracted data clean it fixing columns and types then save it'''
+
+# pylint: disable=line-too-long
+
 import pandas as pd
 
 
@@ -36,10 +39,20 @@ def round_floats_2dp(df):
     return df
 
 
+def clean_phone_numbers(df):
+    """ Transforms the phone numbers so that they all follow the same pattern. """
+    df['phone'] = df['phone'].str.replace(
+        r'(\(|\))', '', regex=True).replace(r'x(.*)', '', regex=True).replace(r'^1-', '', regex=True)
+    df['phone'] = df['phone'].str.rstrip(
+        ' ').str.replace('.', '-').str.replace(' ', '-')
+    return df
+
+
 if __name__ == "__main__":
     plants_df = pd.read_json("plants.json")
     cleaned_df = add_columns(plants_df)
     cleaned_df = change_type_to_date(cleaned_df)
     cleaned_df = drop_columns(cleaned_df)
     cleaned_df = round_floats_2dp(cleaned_df)
+    cleaned_df = clean_phone_numbers(cleaned_df)
     cleaned_df.to_csv("cleaned_plants_data.csv", index=False)
