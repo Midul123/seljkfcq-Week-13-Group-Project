@@ -3,16 +3,16 @@
 -- Drops all tables to reset database
 
 IF OBJECT_ID('gamma.plant_reading', 'U') IS NOT NULL
-    DROP TABLE gamma.plant_reading
+    DROP TABLE gamma.plant_reading;
 
 IF OBJECT_ID('gamma.plant', 'U') IS NOT NULL
-    DROP TABLE gamma.plant
+    DROP TABLE gamma.plant;
 
 IF OBJECT_ID('gamma.botanist', 'U') IS NOT NULL
-    DROP TABLE gamma.botanist
+    DROP TABLE gamma.botanist;
 
 IF OBJECT_ID('gamma.city', 'U') IS NOT NULL
-    DROP TABLE gamma.city
+    DROP TABLE gamma.city;
 
 
 -- Creates Botanist Table

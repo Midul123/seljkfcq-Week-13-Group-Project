@@ -3,11 +3,12 @@ __pycache__
 .pytest_cache
 .ipynb_checkpoints
 .venv
-*.csv
 .env
-*.json
 .terraform*
 terraform.tfvars
 terraform.tfstate
 terraform.tfstate.backup
+*.csv
+*.json
+tmp/
 c19-m3y-plants/
