@@ -71,15 +71,23 @@ def save_recordings_to_parquet() -> None:
     logging.info("Created parquet structure & files")
 
 
-def reset_db():
+def reset_db(conn: pyodbc.Connection):
     """Reset database after fetching and uploading data"""
-    subprocess.run(["bash", "reset.sh"])
+
+    with conn.cursor() as cur:
+        cur.execute("delete from gamma.plant_reading;")
+        cur.execute("delete from gamma.plant;")
+        cur.execute("delete from gamma.botanist;")
+        cur.execute("delete from gamma.city;")
+        conn.commit()
 
 
 def handler(event=None, context=None) -> None:
     """Handler function for lambda."""
     save_recordings_to_parquet()
-    reset_db()
+    conn = get_db_connection()
+    reset_db(conn)
+    conn.close()
 
 
 if __name__ == "__main__":
