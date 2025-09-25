@@ -86,6 +86,7 @@ resource "aws_lambda_function" "project-lambda-1" {
       DB_NAME=var.DB_NAME
       DB_SCHEMA=var.DB_SCHEMA
       DB_DRIVER=var.DB_DRIVER
+      ROLE_ARN=aws_iam_role.lambda_exec_role.arn
     }
   }
 
