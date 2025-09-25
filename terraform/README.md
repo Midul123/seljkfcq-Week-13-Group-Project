@@ -10,9 +10,10 @@ AWS_ACCESS_KEY = [your_access_key]
 AWS_SECRET_KEY = [your_secret_key]
 ```
 
-You'll also need to add your password to access the database, in this format:
+You'll also need to add your password to access the database, and the ARN of the role created for the Lambda function, in this format:
 ```
 DB_PASSWORD = [your_db_password]
+IAM_USER_ARN=[lambda_function_arn]
 ```
 
 ## 🚀 How to run
