@@ -1,2 +1,25 @@
-# seljkfcq-Week-13-Group-Project
-Group Project repository for Midul, Malena, Mitali, Yacquub
+# 🌱 Week 13 Group Project - Midul, Mitali, Yacquub and Malena
+
+This repository contains all the necessary files to run our LMNH Botanical Wing project.
+
+## 🗂️ Files and folders explained
+
+Files:
+
+- `README.md`
+    - The file that you're currently reading
+- `.gitignore`
+    - Tells Git which files to ignore for any changes
+- `requirements.txt`
+    - All requirements needed to run the project
+
+Folders:
+
+- `.github/`
+    - Configuration files used by Github
+- `dashboard/`
+    - Files related to the dashboard creation
+- `pipeline/`
+    - Files related to the ETL process
+- `terraform/`
+    - Terraform scripts for the creation of all AWS resources needed
