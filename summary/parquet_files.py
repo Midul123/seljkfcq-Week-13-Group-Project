@@ -1,6 +1,7 @@
 """Script for handling creation of parquet files."""
 
 import os
+import subprocess
 import logging
 import pyodbc
 import awswrangler as wr
@@ -70,9 +71,15 @@ def save_recordings_to_parquet() -> None:
     logging.info("Created parquet structure & files")
 
 
+def reset_db():
+    """Reset database after fetching and uploading data"""
+    subprocess.run(["bash", "reset.sh"])
+
+
 def handler(event=None, context=None) -> None:
     """Handler function for lambda."""
     save_recordings_to_parquet()
+    reset_db()
 
 
 if __name__ == "__main__":
