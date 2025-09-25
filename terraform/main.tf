@@ -27,6 +27,20 @@ resource "aws_iam_role" "lambda_exec_role" {
          Service = "lambda.amazonaws.com"
        },
        Effect = "Allow"
+     },
+     {
+       Action = "sts:AssumeRole",
+       Principal = {
+         Service = "s3.amazonaws.com"
+       },
+       Effect = "Allow"
+     },
+     {
+       Action = "sts:AssumeRole",
+       Principal = {
+         AWS = var.IAM_USER_ARN
+       },
+       Effect = "Allow"
      }
    ]
   })

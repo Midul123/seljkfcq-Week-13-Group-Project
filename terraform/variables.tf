@@ -11,6 +11,10 @@ variable "AWS_SECRET_KEY" {
   type = string
 }
 
+variable "IAM_USER_ARN" {
+  type = string
+}
+
 variable "DB_HOST" {
   type = string
   default = "c19-plants-db.c57vkec7dkkx.eu-west-2.rds.amazonaws.com"
