@@ -111,6 +111,7 @@ def run_transform() -> None:
     cleaned_df = clean_phone_numbers(cleaned_df)
     cleaned_df = remove_brackets_from_scientific_name(cleaned_df)
     cleaned_df = clean_emails(cleaned_df)
+    save_data_as_csv(cleaned_df)
     logging.info("Transform script run successfully")
 
 
