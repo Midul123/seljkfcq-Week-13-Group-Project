@@ -48,8 +48,6 @@ resource "aws_lambda_function" "project-lambda-1" {
 
   environment {
     variables = {
-      KEY_ACCESS = var.AWS_ACCESS_KEY
-      KEY_SECRET = var.AWS_SECRET_KEY
       DB_HOST=var.DB_HOST
       DB_PORT=1433
       DB_USER=var.DB_USER
