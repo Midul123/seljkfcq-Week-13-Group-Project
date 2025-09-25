@@ -40,6 +40,11 @@ resource "aws_lambda_function" "project-lambda-1" {
   image_uri     = var.IMAGE_URI
   memory_size = 512
   timeout     = 300
+  logging_config {
+    log_format            = "JSON"
+    application_log_level = "INFO"
+    system_log_level      = "WARN"
+  }
 
   environment {
     variables = {
