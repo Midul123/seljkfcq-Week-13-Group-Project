@@ -80,7 +80,7 @@ resource "aws_lambda_function" "project-lambda-1" {
 
 # Lambda (daily)
 resource "aws_lambda_function" "project-lambda-2" {
-  function_name = "c19-seljkfcq-lambda-function-tf"
+  function_name = "c19-seljkfcq-lambda-function-tf-2"
   role          = aws_iam_role.lambda_exec_role.arn
   package_type  = "Image"
   image_uri     = var.IMAGE_URI_2
