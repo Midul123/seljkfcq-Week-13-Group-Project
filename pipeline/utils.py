@@ -16,9 +16,9 @@ def setup_logging() -> None:
 def check_for_tmp_folder() -> None:
     """Creates a folder for data outputs if it does not exists."""
 
-    if not os.path.isdir('tmp'):
+    if not os.path.isdir('/tmp'):
         logging.info("Creating tmp folder")
-        os.mkdir('tmp')
+        os.mkdir('/tmp')
 
 
 def get_db_connection() -> pyodbc.Connection:
