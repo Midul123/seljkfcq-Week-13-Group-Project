@@ -13,7 +13,7 @@ resource "aws_ecr_repository" "project-ecr" {
 }
 
 
-## Lambda and AWS role
+## Lambdas and AWS role
 
 # Role
 resource "aws_iam_role" "lambda_exec_role" {
@@ -47,12 +47,43 @@ resource "aws_cloudwatch_log_group" "example" {
   }
 }
 
-# Lambda
+# Lambda (minute by minute)
 resource "aws_lambda_function" "project-lambda-1" {
   function_name = "c19-seljkfcq-lambda-function-tf"
   role          = aws_iam_role.lambda_exec_role.arn
   package_type  = "Image"
-  image_uri     = var.IMAGE_URI
+  image_uri     = var.IMAGE_URI_1
+  memory_size = 512
+  timeout     = 300
+  logging_config {
+    log_format            = "JSON"
+    application_log_level = "INFO"
+    system_log_level      = "WARN"
+  }
+
+  depends_on = [aws_cloudwatch_log_group.example]
+
+  environment {
+    variables = {
+      DB_HOST=var.DB_HOST
+      DB_PORT=1433
+      DB_USER=var.DB_USER
+      DB_PASSWORD=var.DB_PASSWORD
+      DB_NAME=var.DB_NAME
+      DB_SCHEMA=var.DB_SCHEMA
+      DB_DRIVER=var.DB_DRIVER
+    }
+  }
+
+  architectures = ["x86_64"]
+}
+
+# Lambda (daily)
+resource "aws_lambda_function" "project-lambda-2" {
+  function_name = "c19-seljkfcq-lambda-function-tf"
+  role          = aws_iam_role.lambda_exec_role.arn
+  package_type  = "Image"
+  image_uri     = var.IMAGE_URI_2
   memory_size = 512
   timeout     = 300
   logging_config {
