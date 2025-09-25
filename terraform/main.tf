@@ -32,6 +32,15 @@ resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
  role       = aws_iam_role.lambda_exec_role.name
  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
+resource "aws_cloudwatch_log_group" "example" {
+  name              = "/aws/lambda/c19-seljkfcq-lambda-function-tf"
+  retention_in_days = 14
+
+  tags = {
+    Environment = "production"
+    Application = "project-lambda-1"
+  }
+}
 
 resource "aws_lambda_function" "project-lambda-1" {
   function_name = "c19-seljkfcq-lambda-function-tf"
@@ -45,6 +54,9 @@ resource "aws_lambda_function" "project-lambda-1" {
     application_log_level = "INFO"
     system_log_level      = "WARN"
   }
+
+  # Ensure log group exists before function
+  depends_on = [aws_cloudwatch_log_group.example]
 
   environment {
     variables = {
