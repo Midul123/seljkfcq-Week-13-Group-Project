@@ -130,3 +130,9 @@ resource "aws_scheduler_schedule" "lambda-1-scheduler" {
     role_arn = aws_iam_role.scheduler_lambda.arn
   }
 }
+
+## ECR repository 2
+resource "aws_ecr_repository" "project-ecr-2" {
+  name                 = "c19-seljkfcq-ecr-tf-2"
+  image_tag_mutability = "MUTABLE"
+}
