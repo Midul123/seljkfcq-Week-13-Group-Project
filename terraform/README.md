@@ -2,10 +2,6 @@
 
 These files contain all that is needed to set up our AWS resources on the cloud.
 
-## ⚠️ The following resources were created in AWS UI and therefore will need to be setup manually
-
-- AWS EventBridge Scheduler that triggers the lambda inserting new data to the RDS every minute (lambda name: "c19-seljkfcq-lambda-function-tf")
-
 ## 🔨 Setup
 
 Make sure to add a `terraform.tfvars` file with your AWS access key and secret access key in this format:
