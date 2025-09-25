@@ -54,15 +54,8 @@ def get_recording_data_df(conn: pyodbc.Connection) -> pd.DataFrame:
 def boto_sesh():
     """Start a boto3 session"""
     load_dotenv()
-    b3_session = boto3.Session(profile_name="lambda-session")
-    sts = b3_session.client("sts")
-    response = sts.assume_role(
-        RoleArn=ENV["ROLE_ARN"],
-        RoleSessionName="lambda-session-1")
 
-    return boto3.Session(aws_access_key_id=response['Credentials']['AccessKeyId'],
-                         aws_secret_access_key=response['Credentials']['SecretAccessKey'],
-                         aws_session_token=response['Credentials']['SessionToken'])
+    return boto3.Session()
 
 
 def save_recordings_to_parquet() -> None:
