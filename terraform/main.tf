@@ -24,14 +24,10 @@ resource "aws_iam_role" "lambda_exec_role" {
      {
        Action = "sts:AssumeRole",
        Principal = {
-         Service = "lambda.amazonaws.com"
-       },
-       Effect = "Allow"
-     },
-     {
-       Action = "sts:AssumeRole",
-       Principal = {
-         Service = "s3.amazonaws.com"
+         Service = [
+          "lambda.amazonaws.com",
+          "s3.amazonaws.com"
+         ]
        },
        Effect = "Allow"
      },
@@ -48,6 +44,10 @@ resource "aws_iam_role" "lambda_exec_role" {
 resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
  role       = aws_iam_role.lambda_exec_role.name
  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+resource "aws_iam_role_policy_attachment" "lambda_s3_access" {
+ role       = aws_iam_role.lambda_exec_role.name
+ policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 }
 
 # Cloudwatch log group
@@ -86,7 +86,6 @@ resource "aws_lambda_function" "project-lambda-1" {
       DB_NAME=var.DB_NAME
       DB_SCHEMA=var.DB_SCHEMA
       DB_DRIVER=var.DB_DRIVER
-      ROLE_ARN=aws_iam_role.lambda_exec_role.arn
     }
   }
 
@@ -118,6 +117,7 @@ resource "aws_lambda_function" "project-lambda-2" {
       DB_NAME=var.DB_NAME
       DB_SCHEMA=var.DB_SCHEMA
       DB_DRIVER=var.DB_DRIVER
+      ROLE_ARN=aws_iam_role.lambda_exec_role.arn
     }
   }
 
