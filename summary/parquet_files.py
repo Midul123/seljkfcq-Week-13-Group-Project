@@ -5,7 +5,7 @@ import subprocess
 import logging
 import pyodbc
 import awswrangler as wr
-from boto3 import session
+import boto3
 import pandas as pd
 
 
@@ -52,8 +52,15 @@ def get_recording_data_df(conn: pyodbc.Connection) -> pd.DataFrame:
 
 def boto_sesh():
     """Start a boto3 session"""
-    return session.Session(aws_access_key_id=ENV["AWS_ACCESS_KEY"],
-                           aws_secret_access_key=ENV["AWS_SECRET_ACCESS_KEY"])
+    b3_session = boto3.Session(profile_name="lambda-session")
+    sts = b3_session.client("sts")
+    response = sts.assume_role(
+        RoleArn="arn:aws:iam::129033205317:role/seljkfcq-lambda-execution-role",
+        RoleSessionName="lambda-session-1")
+
+    return boto3.Session(aws_access_key_id=response['Credentials']['AccessKeyId'],
+                         aws_secret_access_key=response['Credentials']['SecretAccessKey'],
+                         aws_session_token=response['Credentials']['SessionToken'])
 
 
 def save_recordings_to_parquet() -> None:
