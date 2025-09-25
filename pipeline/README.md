@@ -13,3 +13,4 @@ brew install msodbcsql18 mssql-tools18
 - GO
 - SELECT * FROM .... ;
 - GO
+
