@@ -1,0 +1,6 @@
+pandas
+pyodbc
+python-dotenv
+pyarrow
+awswrangler
+boto3
