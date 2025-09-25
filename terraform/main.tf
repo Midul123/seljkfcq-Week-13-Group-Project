@@ -125,6 +125,8 @@ resource "aws_lambda_function" "project-lambda-2" {
 }
 
 ## Scheduler 1
+
+# Role
 resource "aws_iam_role" "scheduler_lambda" {
   name = "m3y-scheduler-lambda-role"
   assume_role_policy = jsonencode({
@@ -161,7 +163,7 @@ resource "aws_iam_policy" "scheduler_lambda" {
   })
 }
 
-# Scheduler
+# Scheduler 1
 resource "aws_scheduler_schedule" "lambda-1-scheduler" {
   name = "c19-m3y-trigger-lambda-scheduler-minute"
   group_name = "default"
@@ -173,6 +175,22 @@ resource "aws_scheduler_schedule" "lambda-1-scheduler" {
 
   target {
     arn = aws_lambda_function.project-lambda-1.arn
+    role_arn = aws_iam_role.scheduler_lambda.arn
+  }
+}
+
+# Scheduler 2
+resource "aws_scheduler_schedule" "lambda-2-scheduler" {
+  name = "c19-m3y-trigger-lambda-scheduler-daily"
+  group_name = "default"
+  schedule_expression = "cron(5 0 * * ? *)"
+
+  flexible_time_window {
+    mode = "OFF"
+  }
+
+  target {
+    arn = aws_lambda_function.project-lambda-2.arn
     role_arn = aws_iam_role.scheduler_lambda.arn
   }
 }
