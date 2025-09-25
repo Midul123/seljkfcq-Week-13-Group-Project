@@ -1,6 +1,7 @@
 """Script for handling creation of parquet files."""
 
 from os import environ as ENV
+from dotenv import load_dotenv
 import subprocess
 import logging
 import pyodbc
@@ -52,10 +53,11 @@ def get_recording_data_df(conn: pyodbc.Connection) -> pd.DataFrame:
 
 def boto_sesh():
     """Start a boto3 session"""
+    load_dotenv()
     b3_session = boto3.Session(profile_name="lambda-session")
     sts = b3_session.client("sts")
     response = sts.assume_role(
-        RoleArn="arn:aws:iam::129033205317:role/seljkfcq-lambda-execution-role",
+        RoleArn=ENV["ROLE_ARN"],
         RoleSessionName="lambda-session-1")
 
     return boto3.Session(aws_access_key_id=response['Credentials']['AccessKeyId'],
