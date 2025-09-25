@@ -21,5 +21,7 @@ Folders:
     - Files related to the dashboard creation
 - `pipeline/`
     - Files related to the ETL process
+- `summary/`
+    - Files related to the summarising of the RDS data, to prepare it for storage in the S3 bucket
 - `terraform/`
     - Terraform scripts for the creation of all AWS resources needed
