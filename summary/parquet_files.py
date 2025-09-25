@@ -1,11 +1,11 @@
 """Script for handling creation of parquet files."""
 
-import os
+from os import environ as ENV
 import subprocess
 import logging
 import pyodbc
 import awswrangler as wr
-import boto3
+from boto3 import session
 import pandas as pd
 
 
@@ -52,8 +52,8 @@ def get_recording_data_df(conn: pyodbc.Connection) -> pd.DataFrame:
 
 def boto_sesh():
     """Start a boto3 session"""
-    return boto3.Session(aws_access_key_id=os.getenv("AWS_ACCESS_KEY"),
-                         aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"))
+    return session.Session(aws_access_key_id=ENV["AWS_ACCESS_KEY"],
+                           aws_secret_access_key=ENV["AWS_SECRET_ACCESS_KEY"])
 
 
 def save_recordings_to_parquet() -> None:
@@ -65,8 +65,11 @@ def save_recordings_to_parquet() -> None:
     df = get_recording_data_df(conn)
     conn.close()
 
-    wr.s3.to_parquet(df, path="s3://c19-seljkfcq-project/input/plant_readings",
-                     dataset=True, boto3_session=b3, partition_cols=['year', 'month', 'day'])
+    wr.s3.to_parquet(df=df,
+                     dataset=True,
+                     path="s3://c19-seljkfcq-project/input/plant_readings",
+                     partition_cols=['year', 'month', 'day'],
+                     boto3_session=b3)
 
     logging.info("Created parquet structure & files")
 
