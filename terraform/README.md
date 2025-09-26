@@ -2,7 +2,7 @@
 
 These files contain all that is needed to set up our AWS resources on the cloud.
 
-## 🔨 Setup
+## 🛠️ Setup
 
 Make sure to add a `terraform.tfvars` file with your AWS access key and secret access key in this format:
 ```
