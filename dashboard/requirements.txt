@@ -1,0 +1,8 @@
+streamlit
+awswrangler
+python-dotenv
+pyodbc
+pandas
+altair
+vegafusion
+vl-convert-python

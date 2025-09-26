@@ -1,8 +1,5 @@
 """Script for handling creation of parquet files."""
 
-from os import environ as ENV
-from dotenv import load_dotenv
-import subprocess
 import logging
 import pyodbc
 import awswrangler as wr
@@ -53,7 +50,6 @@ def get_recording_data_df(conn: pyodbc.Connection) -> pd.DataFrame:
 
 def boto_sesh():
     """Start a boto3 session"""
-    load_dotenv()
 
     return boto3.Session()
 
