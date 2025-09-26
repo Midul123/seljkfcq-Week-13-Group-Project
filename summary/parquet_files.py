@@ -80,10 +80,15 @@ def reset_db(conn: pyodbc.Connection):
     """Reset database after fetching and uploading data"""
 
     with conn.cursor() as cur:
-        cur.execute("delete from gamma.plant_reading;")
-        cur.execute("delete from gamma.plant;")
-        cur.execute("delete from gamma.botanist;")
-        cur.execute("delete from gamma.city;")
+        cur.execute("DELETE FROM gamma.plant_reading;")
+        cur.execute("DELETE FROM gamma.plant;")
+        cur.execute("DELETE FROM gamma.botanist;")
+        cur.execute("DELETE FROM gamma.city;")
+
+        cur.execute("DBCC CHECKIDENT ('gamma.plant_reading', RESEED, 0);")
+        cur.execute("DBCC CHECKIDENT ('gamma.plant', RESEED, 0);")
+        cur.execute("DBCC CHECKIDENT ('gamma.botanist', RESEED, 0);")
+        cur.execute("DBCC CHECKIDENT ('gamma.city', RESEED, 0);")
         conn.commit()
 
 
