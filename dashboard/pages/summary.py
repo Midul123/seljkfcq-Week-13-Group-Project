@@ -1,12 +1,8 @@
-import awswrangler as wr
-import pandas as pd
 import streamlit as st
-from os import environ as ENV
-import altair as alt
-from dashboard.get_all_data import get_all_data
-from dashboard.charts import avg_moisture, create_line_chart_temp
-from dashboard.graphs import summary_data
-from dashboard.tables import chosen_plants, selected_plants_name, selected_plants_soil, selected_plants_temp
+from get_all_data import get_all_data
+from charts import avg_moisture, create_line_chart_temp
+from graphs import summary_data
+from tables import chosen_plants, selected_plants_name, selected_plants_soil, selected_plants_temp
 
 if __name__ == "__main__":
     st.set_page_config(layout="wide")
