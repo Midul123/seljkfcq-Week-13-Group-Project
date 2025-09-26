@@ -17,6 +17,8 @@ Folders:
 
 - `.github/`
     - Configuration files used by Github
+- `images/`
+    - Contains the images used in this README file
 - `dashboard/`
     - Files related to the dashboard creation
 - `pipeline/`
@@ -28,7 +30,7 @@ Folders:
 
 ## 📐 Architecture diagram
 
-<img width="300px" src="https://github.com/Midul123/seljkfcq-Week-13-Group-Project/blob/main/images/LNMH_Architecture_Diagram.png">
+<img width="400px" src="https://github.com/Midul123/seljkfcq-Week-13-Group-Project/blob/main/images/LNMH_Architecture_Diagram.png">
 
 ## 🧩 ERD
 
