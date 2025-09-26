@@ -23,11 +23,23 @@ if __name__ == "__main__":
     filtered_data = data[data['month'] == selected_month]
 
     with filter_col2:
-        available_days = sorted(filtered_data['day'].unique())
-        selected_day = st.selectbox("Select Day", available_days)
+        available_days = sorted([int(day)
+                                for day in filtered_data['day'].unique()])
+        if len(available_days) > 1:
+            selected_day_range = st.select_slider(
+                "Select Day Range",
+                options=available_days,
+                value=(available_days[0], available_days[-1])
+            )
+        else:
+            selected_day_range = (available_days[0], available_days[0])
+            st.info(f"Only one day available: {available_days[0]}")
 
-    # Final days
-    filtered_data = filtered_data[filtered_data['day'] == selected_day]
+    # Filter by day range
+    filtered_data = filtered_data[
+        (filtered_data['day'].astype(int) >= selected_day_range[0]) &
+        (filtered_data['day'].astype(int) <= selected_day_range[1])
+    ]
 
     col1, col2 = st.columns(2)
 
