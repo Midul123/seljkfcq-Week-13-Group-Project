@@ -19,7 +19,7 @@ def get_all_data() -> pd.DataFrame:
 
 
 def upload_to_city_table(conn: pyodbc.Connection, df: pd.DataFrame) -> None:
-    """Upload data to city table."""
+    """Check for duplicates and upload to cities table"""
 
     df = df[["city", "country"]].drop_duplicates()
     rows = list(df.itertuples(index=False))
@@ -46,7 +46,7 @@ def upload_to_city_table(conn: pyodbc.Connection, df: pd.DataFrame) -> None:
 
 
 def upload_to_botanist_table(conn: pyodbc.Connection, df: pd.DataFrame) -> None:
-    """Upload data to botanist table."""
+    """Check for duplicates, and upload botanist to botanist table"""
 
     df = df[["botanist_name", "email", "phone"]].drop_duplicates()
     rows = list(df.itertuples(index=False))
@@ -75,7 +75,7 @@ def upload_to_botanist_table(conn: pyodbc.Connection, df: pd.DataFrame) -> None:
 
 
 def get_all_plant_id_name(conn: pyodbc.Connection) -> pd.DataFrame:
-    """Return all plant IDs & names as dataframe."""
+    """Return all plant IDs & names as dataframe. To map to correct plant"""
 
     query = "SELECT plant_id, plant_name FROM plant"
     df_plant = pd.read_sql(query, conn)
@@ -83,7 +83,7 @@ def get_all_plant_id_name(conn: pyodbc.Connection) -> pd.DataFrame:
 
 
 def get_all_city_id_name(conn: pyodbc.Connection) -> pd.DataFrame:
-    """Return all city IDs & names as dataframe."""
+    """Return all city IDs & names as dataframe. To map to current city"""
 
     query = "SELECT city_id, city_name FROM city"
     df_city = pd.read_sql(query, conn)
@@ -99,7 +99,7 @@ def get_all_botanist_id_name(conn: pyodbc.Connection) -> pd.DataFrame:
 
 
 def upload_to_plant_table(conn: pyodbc.Connection, df: pd.DataFrame) -> None:
-    """Upload data to plant table."""
+    """Upload data to plant table. Check for duplicate plants"""
 
     df = df[["name", "lat", "long", "city",
              "scientific_name"]].drop_duplicates()
@@ -167,7 +167,7 @@ def upload_to_plant_reading_table(conn: pyodbc.Connection, df: pd.DataFrame) -> 
 
 
 def run_load() -> None:
-    """Run load script."""
+    """Run load script All in one function"""
 
     conn = get_db_connection()
     data = get_all_data()

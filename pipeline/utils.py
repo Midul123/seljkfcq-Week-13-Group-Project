@@ -1,3 +1,4 @@
+"""Utility folder for functions used multiple times"""
 import os
 from os import environ as ENV
 from dotenv import load_dotenv

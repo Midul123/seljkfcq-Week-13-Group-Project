@@ -66,7 +66,7 @@ def drop_null_plants(plant_data: list) -> list:
 
 
 def save_data_as_json(plant_data: list) -> None:
-    """Add plant data to temporary folder as a JSON file."""
+    """Add plants data to temporary folder as a JSON file."""
 
     check_for_tmp_folder()
     with open('/tmp/plants.json', 'w') as f:
