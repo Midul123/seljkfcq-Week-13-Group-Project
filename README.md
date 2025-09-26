@@ -28,6 +28,8 @@ Folders:
 
 ## 📐 Architecture diagram
 
+<img width="500px" src="https://github.com/Midul123/seljkfcq-Week-13-Group-Project/blob/main/images/LNMH_Architecture_Diagram.png">
+
 ## 🧩 ERD
 
 ## 📊 Dashboard wireframes
