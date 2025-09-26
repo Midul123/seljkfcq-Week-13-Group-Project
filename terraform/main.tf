@@ -200,20 +200,3 @@ resource "aws_ecr_repository" "project-ecr-2" {
   name                 = "c19-seljkfcq-ecr-tf-2"
   image_tag_mutability = "MUTABLE"
 }
-
-
-# Second Scheduler
-resource "aws_scheduler_schedule" "lambda-2-scheduler" {
-  name = "c19-m3y-trigger-lambda-scheduler-daily"
-  group_name = "default"
-  schedule_expression = "cron(* * * * ? *)"
-
-  flexible_time_window {
-    mode = "OFF"
-  }
-
-  target {
-    arn = aws_lambda_function.project-lambda-1.arn
-    role_arn = aws_iam_role.scheduler_lambda.arn
-  }
-}
