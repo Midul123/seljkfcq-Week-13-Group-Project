@@ -4,3 +4,8 @@ pandas
 altair
 vegafusion
 vl-convert-python
+streamlit
+awswrangler
+boto3
+altair
+

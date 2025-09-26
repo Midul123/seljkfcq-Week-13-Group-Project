@@ -1,0 +1,43 @@
+FROM fedora:39
+
+ARG UNIXODBC_VERSION=2.3.12
+
+RUN dnf install -y \
+    gzip tar openssl-devel gcc gcc-c++ make automake kernel-devel \
+    python3 python3-pip
+
+
+RUN curl ftp://ftp.unixodbc.org/pub/unixODBC/unixODBC-${UNIXODBC_VERSION}.tar.gz -O \
+    && tar xzvf unixODBC-${UNIXODBC_VERSION}.tar.gz \
+    && cd unixODBC-${UNIXODBC_VERSION} \
+    && ./configure --sysconfdir=/opt --disable-gui --disable-drivers --enable-iconv --with-iconv-char-enc=UTF8 --with-iconv-ucode-enc=UTF16LE --prefix=/opt \
+    && make \
+    && make install
+
+RUN curl https://packages.microsoft.com/config/rhel/9/prod.repo > /etc/yum.repos.d/mssql-release.repo
+RUN dnf install -y e2fsprogs fuse-libs libss
+RUN ACCEPT_EULA=Y dnf install -y msodbcsql18
+
+ENV CFLAGS="-I/opt/include"
+ENV LDFLAGS="-L/opt/lib"
+
+
+RUN mkdir /opt/python/ && cd /opt/python/ && pip3 install pyodbc -t .
+
+RUN dnf install -y openssl
+
+
+WORKDIR /plants
+
+
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
+
+COPY charts.py .
+COPY graphs.py .
+COPY get_all_data.py .
+COPY pages/summary.py .
+COPY homepage.py .
+COPY tables.py .
+
+CMD ["streamlit", "run", "homepage.py"]
