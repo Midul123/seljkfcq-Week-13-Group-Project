@@ -11,6 +11,10 @@ variable "AWS_SECRET_KEY" {
   type = string
 }
 
+variable "IAM_USER_ARN" {
+  type = string
+}
+
 variable "DB_HOST" {
   type = string
   default = "c19-plants-db.c57vkec7dkkx.eu-west-2.rds.amazonaws.com"
@@ -42,7 +46,12 @@ variable "DB_DRIVER" {
   default = "ODBC Driver 18 for SQL Server"
 }
 
-variable "IMAGE_URI" {
+variable "IMAGE_URI_1" {
   type = string
   default = "129033205317.dkr.ecr.eu-west-2.amazonaws.com/c19-seljkfcq-ecr-tf:latest"
+}
+
+variable "IMAGE_URI_2" {
+  type = string
+  default = "129033205317.dkr.ecr.eu-west-2.amazonaws.com/c19-seljkfcq-ecr-tf-2:latest"
 }

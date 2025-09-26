@@ -6,8 +6,6 @@ __pycache__
 .env
 .terraform*
 terraform.tfvars
-terraform.tfstate
-terraform.tfstate.backup
 *.csv
 *.json
 tmp/
