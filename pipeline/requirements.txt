@@ -1,5 +1,4 @@
 requests
-requests_mock
 ipykernel
 pandas
 python-dotenv
@@ -8,5 +7,4 @@ pylint
 pytest
 aiohttp
 asyncio
-pytest_asyncio
 pyarrow

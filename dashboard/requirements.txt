@@ -1,0 +1,6 @@
+python-dotenv
+pyodbc
+pandas
+altair
+vegafusion
+vl-convert-python
