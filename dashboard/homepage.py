@@ -12,6 +12,7 @@ alt.data_transformers.enable("vegafusion")
 
 
 if __name__ == "__main__":
+    st.title("Plants live data")
     all_data = live_data()
     temp_data = temp_over_time(all_data)
     soil_data = soil_over_time(all_data)
