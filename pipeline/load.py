@@ -2,7 +2,6 @@
 
 # pylint: disable=line-too-long, c-extension-no-member
 
-from os import environ as ENV
 import logging
 
 import pandas as pd
