@@ -1,4 +1,4 @@
-# 🧰 Pipeline
+# 🪣 Summary
 
 This folder contains all the files to run the summarising of the RDS data and the push to long-term storage.
 
