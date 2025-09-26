@@ -32,6 +32,14 @@ Folders:
 
 ## 🧩 ERD
 
-<img width="500px" src="https://github.com/Midul123/seljkfcq-Week-13-Group-Project/blob/main/images/LNMH_ERD.png">
+<img width="600px" src="https://github.com/Midul123/seljkfcq-Week-13-Group-Project/blob/main/images/LNMH_ERD.png">
 
 ## 📊 Dashboard wireframes
+
+### Live data page
+
+<img width="600px" src="https://github.com/Midul123/seljkfcq-Week-13-Group-Project/blob/main/images/LMNH_Dashboard_WF_live.png">
+
+### Summary data page
+
+<img width="600px" src="https://github.com/Midul123/seljkfcq-Week-13-Group-Project/blob/main/images/LMNH_Dashboard_WF_summary.png">
