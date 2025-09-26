@@ -14,20 +14,23 @@ async def get_plant_by_id(session: aiohttp.ClientSession, plant_id: int) -> json
 
     url = f"https://sigma-labs-bot.herokuapp.com/api/plants/{plant_id}"
     tries = 0
-    retries = 4
-    while tries < retries:
+    max_retries = 4
+
+    while tries < max_retries:
         async with session.get(url) as response:
+            if response.status == 200:
+                logging.info(f"Connected to API plant endpoint: {plant_id}")
+                return await response.json()
+
+            if response.status == 404:
+                logging.error(
+                    f"ERROR 404: API endpoint for plant does not exist: {plant_id}")
+                break
+
             if response.status == 500:
                 tries += 1
                 logging.error(
-                    f"Couldn't connect to Api server error 500 {plant_id}")
-            if response.status == 200:
-                logging.info(f"Connected to API plant endpoint {plant_id}")
-                return await response.json()
-            if response.status == 404:
-                logging.error(
-                    f"API endpoint for plant does not exist {plant_id}")
-                break
+                    f"ERROR 500: Could not connect to API server for endpoint: {plant_id}")
 
 
 async def loop_plants_api(session: aiohttp.ClientSession, max_attempts: int = 70) -> list:
