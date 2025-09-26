@@ -6,9 +6,15 @@ resource "aws_s3_bucket" "project-s3" {
 }
 
 
-## ECR repository
+## ECR repository 1
 resource "aws_ecr_repository" "project-ecr" {
   name                 = "c19-seljkfcq-ecr-tf"
+  image_tag_mutability = "MUTABLE"
+}
+
+## ECR repository 2
+resource "aws_ecr_repository" "project-ecr-2" {
+  name                 = "c19-seljkfcq-ecr-tf-2"
   image_tag_mutability = "MUTABLE"
 }
 
@@ -124,7 +130,7 @@ resource "aws_lambda_function" "project-lambda-2" {
   architectures = ["x86_64"]
 }
 
-## Scheduler 1
+## Schedulers
 
 # Role
 resource "aws_iam_role" "scheduler_lambda" {
@@ -195,8 +201,3 @@ resource "aws_scheduler_schedule" "lambda-2-scheduler" {
   }
 }
 
-## ECR repository 2
-resource "aws_ecr_repository" "project-ecr-2" {
-  name                 = "c19-seljkfcq-ecr-tf-2"
-  image_tag_mutability = "MUTABLE"
-}
